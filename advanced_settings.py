@@ -25,6 +25,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow1):
         self.setupUi(self)
         self.def_button.clicked.connect(self.old_values)
         self.set_button.clicked.connect(self.new_values)
+        self.actionExit.triggered.connect(self.close_application)
+        self.actionAbout.triggered.connect(self.info)
+
 
     def old_values(self):
         move_up = 2
@@ -65,6 +68,20 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow1):
         joi3_down = self.Joint3_down.value()
         base_clock = self.Base_clockwise.value()
         base_anti_clock = self.Base_anti_clockwise.value()
+
+    def close_application(self):
+        choice = QtGui.QMessageBox.question(self, 'Exit!',
+                                            "Are you sure you want to exit?",
+                                            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if choice == QtGui.QMessageBox.Yes:
+            print("Exiting")
+            sys.exit()
+        else:
+            pass
+
+    def info(self):
+        QtGui.QMessageBox.information(self,'About','This software has been created by \nTeam Vyadh, VIT University, Vellore, India')
+
 
 
 if __name__ == "__main__":
