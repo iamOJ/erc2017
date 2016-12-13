@@ -1,16 +1,16 @@
-import sys
-import os
+from os import system as sh
 from PyQt4 import QtCore, QtGui, uic
+import sys
 
-qtCreatorFile = "advanced_settings.ui"  # Enter file here.
-Ui_MainWindow1, QtBaseClass = uic.loadUiType(qtCreatorFile)
 qtCreatorFile1 = "Vyadh.ui"
-Ui_MainWindow2, QtBaseClass2 = uic.loadUiType(qtCreatorFile1)
+Ui_MainWindow1, QtBaseClass1 = uic.loadUiType(qtCreatorFile1)
+qtCreatorFile2 = "advanced_settings.ui"
+Ui_MainWindow2, QtBaseClass2 = uic.loadUiType(qtCreatorFile2)
 
-class MyApp(QtGui.QMainWindow, Ui_MainWindow1):
+class AdvSettings(QtGui.QMainWindow, Ui_MainWindow2):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
-        Ui_MainWindow1.__init__(self)
+        Ui_MainWindow2.__init__(self)
         self.setupUi(self)
         self.def_button.clicked.connect(self.old_values)
         self.set_button.clicked.connect(self.new_values)
@@ -70,10 +70,24 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow1):
     def info(self):
         QtGui.QMessageBox.information(self,'About','This software has been created by \nTeam Vyadh, VIT University, Vellore, India')
 
+class MyApp(QtGui.QMainWindow, Ui_MainWindow1):
+    def __init__(self):
+        QtGui.QMainWindow.__init__(self)
+        Ui_MainWindow1.__init__(self)
+        self.setupUi(self)
+        self.actionArm_Control_Calibration.triggered.connect(self.advanced_settings )
 
+    def advanced_settings(self):
+        print("Opening")
+        app1 = QtGui.QMainWindow(self)
+        window1 = AdvSettings()
+        window1.show()
+        sys.exit(app1.exec_())
 
-if __name__ == "__main__":
+def main():
     app = QtGui.QApplication(sys.argv)
     window = MyApp()
     window.show()
     sys.exit(app.exec_())
+
+main()

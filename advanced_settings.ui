@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Default button</string>
+     <string>Default Values</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">
